@@ -17,8 +17,8 @@ rgx = {
         'arrow':  re.compile(r"\((.*?)\) *=> *\{", re.I)
     },
     'types': {
-        'object':    re.compile(r"^\{.*\}$"),
-        'array':     re.compile(r"^(?:\[.*\]|\.\.\.([$_a-z][$_a-z0-9]*))$"),
+        'Object':    re.compile(r"^\{.*\}$"),
+        'Array':     re.compile(r"^(?:\[.*\]|\.\.\.([$_a-z][$_a-z0-9]*))$"),
         'boolean':   re.compile(r"^(true|false)$"),
         'string':    re.compile(r"^('|\"|`).*('|\"|`)$"),
         'number':    re.compile(r"^[-0-9]*\.?[0-9]*(?:e(?:[-0-9])+)?$", re.I),
@@ -97,8 +97,8 @@ def splitParams(text):
     return params
 
 def setName(pair):
-    objTypRgx = rgx['types']['object']
-    arrTypRgx = rgx['types']['array']
+    objTypRgx = rgx['types']['Object']
+    arrTypRgx = rgx['types']['Array']
 
     if objTypRgx.match(pair[0]):
         return 'options'
@@ -110,16 +110,16 @@ def setName(pair):
     return pair[0]
 
 def setType(pair):
-    arrTypRgx = rgx['types']['array']
+    arrTypRgx = rgx['types']['Array']
     if arrTypRgx.match(pair[0]):
-        return 'array'
+        return 'Array'
     if len(pair) > 1:
         return determineType(pair[1])
     else:
         return 'type'
 
 def formatParams(params):
-    objTypRgx = rgx['types']['object']
+    objTypRgx = rgx['types']['Object']
     splitEq   = partial(string.split, sep='=')
     strpStrs  = partial(map, string.strip)
     toDict    = lambda t : {'name': setName(t), 'type': setType(t)}
