@@ -142,9 +142,6 @@ def parseFn(text):
 
 def genDoc(params):
 
-    if params == None:
-        return ''
-
     lines = []
     tabStopCnt = 1
     top = '/**\n * ${%d:description}\n *' % (tabStopCnt)
