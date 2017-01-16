@@ -16,11 +16,11 @@ function! s:JSDocGetFn()
 endfunction
 
 function! s:JSDocSnipFn()
-  if executable('python')
+  if executable('python2')
     let l:scriptPath = s:JSDocVimScriptPath . '/gen-jsdoc-fn.py'
-    return system('python ' . l:scriptPath, shellescape(s:JSDocGetFn()))
+    return system('python2 ' . l:scriptPath, shellescape(s:JSDocGetFn()))
   else
-    echom "python is not available on your system"
+    echom "python2 is not available on your system"
   endif
 endfunction
 
