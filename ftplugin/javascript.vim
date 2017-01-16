@@ -24,6 +24,11 @@ function! s:JSDocSnipFn()
   endif
 endfunction
 
+" forcing autoload of UltiSnips. Second parameter (trigger) is gibberish so 
+" that it doesn't match the empty string (which would place Vim into insert
+" mode).
+call UltiSnips#Anon('', '#!&@')
+
 if exists('g:generateJSDocFuncDocKeyMap') && exists('*UltiSnips#Anon')
   let s:cmd = [
     \"inoremap <silent>",
