@@ -27,7 +27,11 @@ endfunction
 " forcing autoload of UltiSnips. Second parameter (trigger) is gibberish so 
 " that it doesn't match the empty string (which would place Vim into insert
 " mode).
-call UltiSnips#Anon('', '#!&@')
+try
+  call UltiSnips#Anon('', '#!&@')
+catch /E117/
+  echom 'gen-jsdoc-func-doc plugin depends on UltiSnips (not present)'
+endtry
 
 if exists('g:generateJSDocFuncDocKeyMap') && exists('*UltiSnips#Anon')
   let s:cmd = [
